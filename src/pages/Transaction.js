@@ -4,7 +4,7 @@ import { TransactionTable } from "../components/transaction";
 const Transaction = ({ match }) => {
 	const [blockNumber, setBlockNumber] = useState("");
 	const [transactions, setTransactions] = useState([]);
-	const blockHashFromParams = match.params.id;
+	const blockHashFromParams = match.params.blockId;
 	useEffect(() => {
 		const provider = Ether.provider;
 		provider
@@ -30,7 +30,7 @@ const Transaction = ({ match }) => {
 	return (
 		<div>
 			<p className="text-center h4">
-				Transaction for Block #{blockNumber}
+				Transactions for Block #{blockNumber}
 			</p>
 			<TransactionTable transactions={transactions} />
 		</div>

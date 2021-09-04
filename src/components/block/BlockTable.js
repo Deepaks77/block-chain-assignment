@@ -26,7 +26,7 @@ const BlockTable = ({ history, blocks }) => {
 	const onSelectionChanged = () => {
 		const selectedRows = gridApi.getSelectedRows()[0];
 		history.push({
-			pathname: `/block/${selectedRows.hash}`,
+			pathname: `/transactions/${selectedRows.hash}`,
 		});
 	};
 	return (

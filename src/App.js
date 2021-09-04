@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
-//constants
 import { Ether } from "./utils";
 
 //Pages
@@ -15,15 +14,15 @@ import Nav from "./components/nav/Nav";
 const MIN_ENTRIES = 10;
 
 const App = () => {
-	const [blockData, setBlockData] = useState([]);
+	const [blocksData, setBlocksData] = useState([]);
 	useEffect(() => {
 		const provider = Ether.provider;
 		provider.on("block", (blockNumber) => {
-			console.log("Block Number", blockNumber);
+			// console.log("Block Number", blockNumber);
 			provider
 				.getBlock(blockNumber)
 				.then(({ number, hash, timestamp, gasUsed: { _hex } }) => {
-					setBlockData((currentState) => {
+					setBlocksData((currentState) => {
 						const formattedBlockObj = {
 							number,
 							hash,
@@ -71,9 +70,13 @@ const App = () => {
 				<Route
 					exact
 					path="/"
-					render={(props) => <Home {...props} blocks={blockData} />}
+					render={(props) => <Home {...props} blocks={blocksData} />}
 				/>
-				<Route exact path="/block/:id" component={Transaction} />
+				<Route
+					exact
+					path="/transactions/:blockId"
+					component={Transaction}
+				/>
 			</Switch>
 		</div>
 	);
